@@ -1,15 +1,22 @@
 package com.example.aapdp1.blogcard;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.aapdp1.R;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -23,12 +30,20 @@ public class BlogCardAdapter extends RecyclerView.Adapter<BlogCardViewholder> {
 
     public BlogCardAdapter(ArrayList<BlogCardModel> arr){
         blogCardModel = arr;
+        setHasStableIds(true);
     }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
 
     @NonNull
     @Override
     public BlogCardViewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater=LayoutInflater.from(viewGroup.getContext());
+        Fresco.initialize(viewGroup.getContext());
         View view=layoutInflater.inflate(R.layout.blog_card, viewGroup, false);
         BlogCardViewholder notesViewHolder=new BlogCardViewholder(view);
 
@@ -37,21 +52,22 @@ public class BlogCardAdapter extends RecyclerView.Adapter<BlogCardViewholder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BlogCardViewholder viewHolder, int i) {
-        viewHolder.blogBody.setText(blogCardModel.get(i).getBody());
-        viewHolder.blogTitle.setText(blogCardModel.get(i).getTitle());
-        URL newurl = null;
-        try {
-            newurl = new URL(blogCardModel.get(i).getImage());
-            viewHolder.blogImage.setImageBitmap(BitmapFactory.decodeStream(newurl.openConnection() .getInputStream()));
-        } catch (MalformedURLException e) {
-            Log.d("BlogCardAdapter",e.toString());
-            e.printStackTrace();
-        }
-         catch (IOException e) {
-             Log.d("BlogCardAdapter",e.toString());
-            e.printStackTrace();
-        }
+    public void onBindViewHolder(@NonNull final BlogCardViewholder viewHolder, final int i) {
+        viewHolder.blogBody.setText(blogCardModel.get(getItemCount()-i-1).getBody());
+        viewHolder.blogTitle.setText(blogCardModel.get(getItemCount()-i-1).getTitle());
+        viewHolder.blogLikes.setText(Integer.toString(blogCardModel.get(getItemCount()-i-1).getLikes()));
+        //viewHolder.blogImage.setImageURI(Uri.parse(blogCardModel.get(i).toString()));
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Glide.with(viewHolder.itemView.getRootView().getContext()).load(blogCardModel.get(getItemCount()-i-1).getImage()).into(viewHolder.blogImage);
+
+            }
+        }, 3000);
+
+
+
 
     }
 

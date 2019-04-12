@@ -9,6 +9,7 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/blog_title"
+            android:textColor="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
@@ -22,10 +23,9 @@
             android:id="@+id/blog_likes"/>
 
     </LinearLayout>
-    <ImageView
-        android:layout_width="0dp"
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="wrap_content"
+        android:id="@+id/blog_card_image"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/blog_image"/>
-
+        android:src="@drawable/image_loading"/>
 </LinearLayout>

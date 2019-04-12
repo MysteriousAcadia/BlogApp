@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateBlogActivity"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/create_blog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"/>
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/create_blog_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="body"/>
+    <Button
+        android:text="Add Image"
+        android:layout_width="wrap_content"
+        android:id="@+id/create_blog_add_image"
+        android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/create_blog_image_view"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Blog"
+        android:id="@+id/create_blog_create_blog"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

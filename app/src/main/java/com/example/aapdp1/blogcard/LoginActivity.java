@@ -35,6 +35,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.aapdp1.BlogApp;
 import com.example.aapdp1.MainActivity;
 import com.example.aapdp1.R;
 import com.example.aapdp1.SignupActivity;
@@ -223,6 +224,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             Log.d("LoginActivity", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             finish();
+                            BlogApp.userID = user.getUid();
+                            BlogApp.username = user.getDisplayName();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         } else {
 
